@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>反弹球</title>
+<style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        #box {
+            width:150px;
+            height:150px;
+			border:1px solid #9F9;
+            border-radius:50%;
+            position:absolute;
+            }
+
+
+        
+        
+        @keyframes xuanzhuan {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(180deg);
+            }
+        }
+
+        #box img {
+            width: inherit;
+            height: inherit;
+            border-radius: inherit;
+        
+            animation: xuanzhuan 36s linear infinite;
+        }
+
+</style>
+</head>
+
+
+<body>
+<div id="box">
+<img src="../HTML/课堂练习/JS/小可爱.jpg" alt="" />
+</div>
+
+
+<button id="btn">开始</button>
+</body>
+ 
+
+
+
+<script>
+var btn = document.getElementById('btn');
+var box = document.getElementById('box');
+
+
+btn.onclick = function(){
+	//可视区域的宽度
+	var dw = document.documentElement.clientWidth;
+	var dh = document.documentElement.clientHeight;
+	
+	//横向速度
+	var x = 10;
+	//纵向速度
+	var y = 10;
+	
+	 
+		window.onresize = function()
+		{
+	 dw = document.documentElement.clientWidth;
+	 dh = document.documentElement.clientHeight;
+	 console.log(dw,dh);
+	 }
+	
+	
+		
+		
+		
+		
+		
+	 setInterval(function(){
+		//求出横向临界值
+		var lx = dw - box.offsetWidth;
+		//判断横向取反
+		if (box.offsetLeft >=lx || box.offsetLeft < 0){
+			x = -x;
+		}
+		//计算横向运动的最终结果
+		var left_result = box.offsetLeft + x;
+		if (left_result >= lx){
+			left_result= lx;
+		}
+		
+		//求纵向临界值
+		var ly = dh - box.offsetHeight;
+		if (box.offsetTop >= ly || box.offsetTop < 0){
+			y = -y;
+		}
+		var top_result = box.offsetTop + y;
+		if (top_result >= ly){
+			top_result = ly;
+		}
+		box.style.left = left_result + 'px';
+		box.style.top = top_result + 'px';
+		console.log(1);
+	},20);
+}
+
+</script>
+
+</html>
